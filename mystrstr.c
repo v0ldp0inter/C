@@ -11,7 +11,7 @@ char *my_strstr(char *st, char *p){
           ++c;
           ++st;
         }
-          if(*j == 0x0){
+          if(!*j){
             return st - c;
           }
         
