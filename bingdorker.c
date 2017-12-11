@@ -5,7 +5,7 @@
 #include <getopt.h>
 
 #define wf fprintf
-enum{MAX=900*900};
+const unsigned long MAX = 900*900;
 
 void * error(void *string, size_t erro) {
     unsigned char *ptr = (unsigned char *)string;
