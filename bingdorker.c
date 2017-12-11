@@ -74,10 +74,10 @@ void * help(char *name) {
 
 unsigned char request(char **argv, int argc) {
     banner();
-    FILE *file=NULL;
+    FILE *file = NULL;
     char domain[MAX];
     
-    int opt, verbose=0;
+    int opt, verbose = 0;
     char *search=NULL;
     
     if(argc!=4) {
@@ -136,7 +136,6 @@ unsigned char request(char **argv, int argc) {
     CURL *session;
     CURLcode res;
     
-    unsigned int percorre;
     unsigned const char bing[MAX] = "www.bing.com";
     unsigned const char path[MAX] = "/search?q=site:";
     
