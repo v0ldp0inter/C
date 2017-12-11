@@ -153,6 +153,12 @@ unsigned char request(char **argv, int argc) {
     curl_easy_perform(session);
     
     unsigned int var, deletesite, cxc, count, blank;
+    
+    var = 0;
+    count = 0;
+    blank = 0;
+    deletesite = 0;
+    
     for(cxc = 0; cxc <= 30; ++cxc) {
         
         dinamic.ptr = strstr(dinamic.ptr, "://");
