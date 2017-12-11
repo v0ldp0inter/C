@@ -16,22 +16,26 @@ void * error(void *string, size_t erro) {
     exit(-1);
 }
 
-void * mstrstr(char *needle, char * haystack) {
-    unsigned int b, k, flag, u = strlen(haystack);
-    k=b=flag=0;
-    
-     for ( b = 0; needle[b] != '\0'; b++ ) {
-          for (k = 0; haystack[k] != '\0'; k++ ) 
-         if (needle[b+k] == haystack[k]) {
-           flag++;
-         }
-        if (flag == u) {
-             needle[b] = '\0';
-             break;
-                  
-          } else
-           flag = 0;
-     }
+char *mstrstr(char *st, char *p){
+   if (!*st) return NULL; 
+   char *j = NULL;
+   long c = 0;
+   
+    while(*st){
+        j = p;
+        while(*j != 0x0 && *st == *j){
+          ++j;
+          ++c;
+          ++st;
+        }
+          if(!*j){
+            return st - c;
+          }
+        
+      ++st;
+    }
+  
+  return NULL;
 }
 
 typedef struct {
