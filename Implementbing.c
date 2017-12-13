@@ -19,7 +19,7 @@ char *filter(char *url, char *domain, char *search){
    strcpy(domain, &url[i]);
    for(jmp = 10;domain[jmp];++jmp){
      if(domain[jmp] == '/')
-       domain[jmp] = 0x0;
+        domain[jmp] = 0x0;
    }
   
   return domain;
