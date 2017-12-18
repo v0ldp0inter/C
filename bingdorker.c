@@ -4,6 +4,7 @@
 #include <string.h>
 #include <getopt.h>
 
+#define regex "%[0-9a-zA-Z.^\n]"
 #define wf fprintf
 enum{MAX=900*900};
 
@@ -30,7 +31,7 @@ typedef struct {
     unsigned char *ptr;
     size_t len;
 }dim;
- 
+
 size_t writefunc(void *ptr, size_t size, size_t numbmemb, dim *dinam) {
     size_t nlen = dinam->len + size*numbmemb;
     
@@ -154,16 +155,17 @@ unsigned char request(char **argv, int argc) {
     for(cxc = 0; cxc <= 30; ++cxc) {
         dinamic.ptr = strstr(dinamic.ptr, "://");
         dinamic.ptr += strlen("://");
-        for(var=0; dinamic.ptr[var]; ++var) {
-             sscanf(&dinamic.ptr[var], "%[0-9a-zA-Z.^\n]", &domain[var]);
+        for(var=0;dinamic.ptr[var];++var) {
+        sscanf(&dinamic.ptr[var], regex, &domain[var]);
            }
            
-                for(dlt=0; exc[dlt]!=NULL; ++dlt) {
-                   filter(domain, exc[dlt]);
+                for(dlt=0;exc[dlt]!=NULL;++dlt) {
+                   filter(domain,exc[dlt]);
                  }
                  
-                  for(; domain[blk]!=0x0; blk++) {
-                      printf("[%d] - %s\n", count++, domain);
+                  for(;domain[blk]!=0x0;blk++) {
+                      sleep(2);
+                      printf("+[%d] - %s\n",count++, domain);
                       break;
                   }
     }
