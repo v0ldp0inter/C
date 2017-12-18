@@ -162,7 +162,7 @@ unsigned char request(char **argv, int argc) {
                    filter(domain,exc[dlt]);
                  }
                  
-                  for(;domain[blk]!=0x0;blk++) {
+                  for(blk=0;domain[blk]!=0x0;blk++) {
                       printf("[%d] - %s\n",count++, domain);
                       break;
                   }
