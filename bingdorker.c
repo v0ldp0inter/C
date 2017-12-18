@@ -148,24 +148,24 @@ unsigned char request(char **argv, int argc) {
      
     int var = 0,\
     dlt = 0,\
-    cxc = 0,\
+    i = 0,\
     count = 0,\
     blk = 0;
     
-    for(cxc = 0; cxc <= 30; ++cxc) {
+    for(i = 0; i <= 30; ++i) {
         dinamic.ptr = strstr(dinamic.ptr, "://");
         dinamic.ptr += strlen("://");
-        for(var=0;dinamic.ptr[var];++var) {
+        for(var=0; dinamic.ptr[var]; ++var) {
         sscanf(&dinamic.ptr[var], regex, &domain[var]);
            }
            
-                for(dlt=0;exc[dlt]!=NULL;++dlt) {
-                   filter(domain,exc[dlt]);
+                for(dlt=0; exc[dlt]!=NULL; ++dlt) {
+                   filter(domain, exc[dlt]);
                  }
                  
-                  for(;domain[blk]!=0x0;blk++) {
+                  for(; domain[blk]!=0x0; blk++) {
                       sleep(2);
-                      printf("+[%d] - %s\n",count++, domain);
+                      printf("+[%d] - %s\n", count++, domain);
                       break;
                   }
     }
