@@ -30,7 +30,7 @@ typedef struct {
     unsigned char *ptr;
     size_t len;
 }dim;
-
+ 
 size_t writefunc(void *ptr, size_t size, size_t numbmemb, dim *dinam) {
     size_t nlen = dinam->len + size*numbmemb;
     
