@@ -146,24 +146,20 @@ unsigned char request(char **argv, int argc) {
     curl_easy_setopt(session, CURLOPT_WRITEDATA, &dinamic);
     curl_easy_perform(session);
      
-    int var = 0,\
-    dlt = 0,\
-    i = 0,\
+    int i = 0, j = 0, var = 0,\
     count = 0,\
     blk = 0;
     
-    for(i = 0; i <= 30; ++i) {
+        for(i = 0; i <= 30; ++i) {
         dinamic.ptr = strstr(dinamic.ptr, "://");
         dinamic.ptr += strlen("://");
         for(var=0; dinamic.ptr[var]; ++var) {
         sscanf(&dinamic.ptr[var], regex, &domain[var]);
-           }
-           
-                for(dlt=0; exc[dlt]!=NULL; ++dlt) {
-                   filter(domain, exc[dlt]);
-                 }
-                 
-                  for(; domain[blk]!=0x0; blk++) {
+        }
+                   for(j=0; exc[j]!=NULL; ++j) {
+                   filter(domain, exc[j]);
+                }   
+                      for(; domain[blk]!=0x0; blk++) {
                       sleep(2);
                       printf("+[%d] - %s\n", count++, domain);
                       break;
