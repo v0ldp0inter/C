@@ -4,7 +4,7 @@
 #include <string.h>
 #include <getopt.h>
 
-#define regex "%[0-9a-zA-Z.^\n]"
+#define filtro "<li class=\"b_algo\"><h2><a href=\""
 #define wf fprintf
 enum{MAX=900*900};
 
@@ -14,17 +14,23 @@ void * error(char *string, size_t erro) {
     exit(-1);
 }
 
-char *filter(char *url, char *find){
-  int j, i, p = 0, getcount = 0;
-  for(i = 0; url[i] != 0x0; i++) {
-      for(j = 0; find[j] != 0x0; j++)
-        if(url[i+j] == find[j]) p++; {
-          if(p == j) {
-            url[i] = 0x0;
-            break;
-         } else p = 0;
-     } 
+char *filter(char *url, char *domain, char *search){
+   if (!*url) return NULL; 
+   int c = 0; static int i;
+   char *z = NULL;
+  
+  for(;*url;++url){
+  z = search;
+  for(; *z != 0x0 && *url == *z; ){
+  ++url;++z;
   }
+  if(!*z)
+  strcpy(domain, url);}
+  for(i=10;domain[i];++i){
+    if(domain[i]=='/'){
+      domain[i]=0x0;}
+  }
+  return domain;
 }
 
 typedef struct {
@@ -64,7 +70,7 @@ void * help(char *name) {
 unsigned char request(char **argv, int argc) {
     banner();
     FILE *file = NULL;
-    char domain[MAX];
+    char domain[MAX], teste[MAX];
     
     int opt, verbose = 0;
     char *search=NULL;
@@ -97,33 +103,6 @@ unsigned char request(char **argv, int argc) {
         exit(-1);
     }
     
-    unsigned char *exc[] = {
-      "kstrong",
-      "67000093.r.bat",
-      "estrong",
-      "wstrong",
-      "cid",
-      "aka.ms",
-      "c.d.domain",
-      "cc.bingj.com",
-      "www.microsofttranslate.com",
-      "www.zimbra.com",
-      "bingj.com",
-      "go.microsoft.com",
-      "cc.var",
-      "cc.d.domain",
-      "www.w3.org",
-      "schemas.live.com",
-      "www.bing.com",
-      "login.live.com",
-      "cc.",
-      "strong",
-      "microsoft.com",
-      "bing.com",
-      "www.microsofttranslator.com",
-      NULL  
-    };
-    
     dim dinamic;
     CURL *session;
     CURLcode res;
@@ -136,36 +115,21 @@ unsigned char request(char **argv, int argc) {
     strcat( (char*)path, argv[2]);
     putchar('\n');
     strcat( (char*)bing, (char*)path);
-   
-    session = curl_easy_init();
     
-    curl_easy_setopt(session, CURLOPT_CONNECTTIMEOUT, 10);
+    int i;
+    for(i = 0; i<=9; ++i){
+    
+    session = curl_easy_init();
     curl_easy_setopt(session, CURLOPT_URL, bing);
     curl_easy_setopt(session, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Linux x86_64; rv:29.0) Gecko/20100101 Firefox/29.0");
     curl_easy_setopt(session, CURLOPT_WRITEFUNCTION, writefunc);
     curl_easy_setopt(session, CURLOPT_WRITEDATA, &dinamic);
     curl_easy_perform(session);
-     
-    int i = 0, j = 0, var = 0,\
-    count = 0,\
-    blk = 0;
     
-        for(i = 0; i <= 30; ++i) {
-        dinamic.ptr = strstr(dinamic.ptr, "://");
-        dinamic.ptr += strlen("://");
-        for(var=0; dinamic.ptr[var]; ++var) {
-        sscanf(&dinamic.ptr[var], regex, &domain[var]);
-        }
-                   for(j=0; exc[j]!=NULL; ++j) {
-                   filter(domain, exc[j]);
-                }   
-                      for(; domain[blk]!=0x0; blk++) {
-                      sleep(2);
-                      printf("+[%d] - %s\n", count++, domain);
-                      break;
-                  }
+    filter(dinamic.ptr, domain, filtro);
+    puts(domain);
     }
-   
+    
     curl_easy_cleanup(session);  
     return 0;
 }
