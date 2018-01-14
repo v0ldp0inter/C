@@ -55,7 +55,7 @@ size_t writefunc(void *ptr, size_t size, size_t numbmemb, dim *dinam) {
 void * banner(void) {
     wf(stdout, "\n\t[ bing dorker ]\n");
     wf(stdout, "\t[ coded by vold ]\n"); 
-    wf(stdout, "\t[ greetz: all my friends ;) ]\n");
+    wf(stdout, "\t[ greetz: all my friends ]\n");
  
     return 0;
 }
@@ -108,7 +108,7 @@ unsigned char request(char **argv, int argc) {
     CURLcode res;
     
     unsigned const char bing[MAX] = "www.bing.com";
-    unsigned const char path[MAX] = "/search?q=site:";
+    unsigned const char path[MAX] = "/search?q=";
     
     printf("\nPesquisando por '%s'...\n", argv[2]);
     
