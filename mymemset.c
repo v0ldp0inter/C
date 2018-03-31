@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 void *_mymemset(void *st, char rew, size_t len){
      char *aux = (char *)st;
      size_t i;
