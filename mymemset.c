@@ -14,7 +14,7 @@ int main(int argc, char **argv){
   char aux[] = "teste";
   puts(aux);
   
-  puts(_mymemset(aux, 0x0, sizeof(aux)));
+  _mymemset(aux, 0x0, sizeof(aux));
   puts(aux);
   return 0;
 }
